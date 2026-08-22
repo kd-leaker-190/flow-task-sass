@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable([
     'owner_user_id',
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 ])]
 class Workspace extends Model
 {
+    use SoftDeletes;
+
     /**
      * Get the attributes that should be cast.
      *
@@ -61,5 +64,10 @@ class Workspace extends Model
     public function memberInvitations(): HasMany
     {
         return $this->hasMany(MemberInvitation::class, 'workspace_id');
+    }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class, 'workspace_id');
     }
 }
