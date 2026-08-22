@@ -91,4 +91,9 @@ class Workspace extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class, 'workspace_id');
+    }
 }
