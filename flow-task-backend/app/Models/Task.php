@@ -2,26 +2,28 @@
 
 namespace App\Models;
 
-use App\Enums\ProjectPriority;
-use App\Enums\ProjectStatus;
+use App\Enums\TaskPriority;
+use App\Enums\TaskStatus;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable([
+    'project_id',
     'workspace_id',
     'created_by_user_id',
-    'title',
+    'assigned_to_user_id',
+    'name',
     'description',
     'start_date',
     'end_date',
     'priority',
     'status',
-    'progress',
+    'estimated_hours',
+    'actual_hours',
 ])]
-class Project extends Model
+class Task extends Model
 {
     use SoftDeletes;
 
@@ -35,9 +37,16 @@ class Project extends Model
         return [
             'start_date' => 'datetime',
             'end_date' => 'datetime',
-            'priority' => ProjectPriority::class,
-            'status' => ProjectStatus::class,
+            'priority' => TaskPriority::class,
+            'status' => TaskStatus::class,
+            'estimated_hours' => 'float',
+            'actual_hours' => 'float',
         ];
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
     }
 
     public function workspace(): BelongsTo
@@ -50,8 +59,8 @@ class Project extends Model
         return $this->belongsTo(User::class, 'created_by_user_id');
     }
 
-    public function tasks(): HasMany
+    public function assignedTo(): BelongsTo
     {
-        return $this->hasMany(Task::class);
+        return $this->belongsTo(User::class, 'assigned_to_user_id');
     }
 }

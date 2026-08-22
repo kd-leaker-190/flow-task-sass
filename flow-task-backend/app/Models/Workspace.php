@@ -70,4 +70,9 @@ class Workspace extends Model
     {
         return $this->hasMany(Project::class, 'workspace_id');
     }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class, 'workspace_id');
+    }
 }
