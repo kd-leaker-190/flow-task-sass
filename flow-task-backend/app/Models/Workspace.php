@@ -80,4 +80,9 @@ class Workspace extends Model
     {
         return $this->hasMany(ActivityLog::class, 'workspace_id');
     }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class, 'workspace_id');
+    }
 }

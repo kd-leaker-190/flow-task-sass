@@ -57,6 +57,11 @@ class Project extends Model
 
     public function activityLogs(): HasMany
     {
-        return $this->hasMany(ActivityLog::class, 'workspace_id');
+        return $this->hasMany(ActivityLog::class, 'project_id');
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class, 'project_id');
     }
 }

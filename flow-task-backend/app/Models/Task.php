@@ -67,6 +67,11 @@ class Task extends Model
 
     public function activityLogs(): HasMany
     {
-        return $this->hasMany(ActivityLog::class, 'workspace_id');
+        return $this->hasMany(ActivityLog::class, 'task_id');
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class, 'task_id');
     }
 }

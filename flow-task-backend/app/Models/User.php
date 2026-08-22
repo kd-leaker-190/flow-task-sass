@@ -105,6 +105,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function activityLogs(): HasMany
     {
-        return $this->hasMany(ActivityLog::class, 'workspace_id');
+        return $this->hasMany(ActivityLog::class, 'user_id');
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class, 'user_id');
     }
 }
