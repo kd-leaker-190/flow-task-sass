@@ -10,6 +10,8 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,5 +54,37 @@ class User extends Authenticatable implements MustVerifyEmail
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function ownedWorkspaces(): HasMany
+    {
+        return $this->hasMany(Workspace::class, 'owner_user_id');
+    }
+
+    public function workspaceMembers(): HasMany
+    {
+        return $this->hasMany(WorkspaceMember::class, 'user_id');
+    }
+
+    public function workspaces(): BelongsToMany
+    {
+        return $this->belongsToMany(Workspace::class, 'workspace_members', 'user_id', 'workspace_id')->withPivot([
+            'role_id',
+            'invited_by_user_id',
+            'joined_at',
+        ]);
+    }
+
+    public function invitedMembers(): HasMany
+    {
+        return $this->hasMany(
+            WorkspaceMember::class,
+            'invited_by_user_id'
+        );
+    }
+
+    public function sentMemberInvitations(): HasMany
+    {
+        return $this->hasMany(MemberInvitation::class, 'invited_by_user_id');
     }
 }
