@@ -108,7 +108,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ActivityLog::class, 'user_id');
     }
 
-    public function attachments(): HasMany
+    public function uploadedAttachments(): HasMany
     {
         return $this->hasMany(Attachment::class, 'user_id');
     }

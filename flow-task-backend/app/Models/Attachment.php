@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 #[Fillable([
     'workspace_id',
@@ -18,23 +19,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 ])]
 class Attachment extends Model
 {
-    public function workspace(): BelongsTo
-    {
-        return $this->belongsTo(Workspace::class);
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function project(): BelongsTo
+    public function attachable(): MorphTo
     {
-        return $this->belongsTo(Project::class);
-    }
-
-    public function task(): BelongsTo
-    {
-        return $this->belongsTo(Task::class);
+        return $this->morphTo();
     }
 }

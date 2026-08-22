@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable([
@@ -60,8 +61,8 @@ class Project extends Model
         return $this->hasMany(ActivityLog::class, 'project_id');
     }
 
-    public function attachments(): HasMany
+    public function attachments(): MorphMany
     {
-        return $this->hasMany(Attachment::class, 'project_id');
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 }

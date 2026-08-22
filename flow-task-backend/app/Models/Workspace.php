@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable([
@@ -81,8 +82,8 @@ class Workspace extends Model
         return $this->hasMany(ActivityLog::class, 'workspace_id');
     }
 
-    public function attachments(): HasMany
+    public function attachments(): MorphMany
     {
-        return $this->hasMany(Attachment::class, 'workspace_id');
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 }

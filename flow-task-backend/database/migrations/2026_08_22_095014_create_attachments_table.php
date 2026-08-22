@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('workspace_id')->constrained('workspaces')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
-            $table->foreignId('task_id')->constrained('tasks')->cascadeOnDelete();
+
+            $table->morphs('attachable');
 
             $table->string('name');
             $table->string('path');
