@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Enums\UserStatus;
+use App\Mail\QueuedResetPasswordEmail;
 use App\Mail\QueuedVerifyEmail;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
@@ -55,5 +57,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification(): void
     {
         $this->notify(new QueuedVerifyEmail());
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new QueuedResetPasswordEmail($token));
     }
 }
