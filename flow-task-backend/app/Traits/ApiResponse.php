@@ -18,7 +18,7 @@ trait ApiResponse
     public function errorResponse(mixed $data = null, string $message = '', int $code = 200): JsonResponse
     {
         return response()->json([
-            'status' => 'success',
+            'status' => 'error',
             'message' => $message,
             'data' => $data,
         ], $code);
