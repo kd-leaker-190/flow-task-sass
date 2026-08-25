@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\UserStatus;
+use App\Mail\QueuedVerifyEmail;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -48,5 +50,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
             'status' => UserStatus::class
         ];
+    }
+
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new QueuedVerifyEmail());
     }
 }
