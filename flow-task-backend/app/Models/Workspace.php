@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable([
-    'owner_user_id',
+    'owner_id',
     'name',
     'slug',
     'bio',
@@ -42,5 +42,10 @@ class Workspace extends Model
     public function roles(): HasMany
     {
         return $this->hasMany(Role::class);
+    }
+
+    public function members(): HasMany
+    {
+        return $this->hasMany(WorkspaceMember::class);
     }
 }
