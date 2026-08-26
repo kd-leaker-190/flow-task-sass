@@ -27,7 +27,6 @@ return new class extends Migration
 
             $table->enum('status', ['active', 'inactive', 'suspended'])->default('active');
 
-            $table->softDeletes();
             $table->timestamps();
         });
     }

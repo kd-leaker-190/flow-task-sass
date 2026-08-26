@@ -6,7 +6,6 @@ use App\Enums\WorkspaceStatus;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable([
     'owner_user_id',
@@ -20,8 +19,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 ])]
 class Workspace extends Model
 {
-    use SoftDeletes;
-
     /**
      * Get the attributes that should be cast.
      *

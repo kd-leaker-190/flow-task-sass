@@ -23,7 +23,7 @@ return new class extends Migration
 
             $table->rememberToken();
 
-            $table->enum('status', ['active', 'inactive', 'deleted', 'suspended'])->default('active');
+            $table->enum('status', ['active', 'inactive', 'suspended'])->default('active');
 
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
@@ -35,7 +35,6 @@ return new class extends Migration
 
             $table->timestamp('last_login_at')->nullable();
 
-            $table->softDeletes();
             $table->timestamps();
         });
 
