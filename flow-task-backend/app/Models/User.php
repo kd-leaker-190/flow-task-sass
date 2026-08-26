@@ -20,6 +20,7 @@ use Laravel\Sanctum\HasApiTokens;
 #[Fillable([
     'username',
     'email',
+    'email_verified_at',
     'password',
     'status',
     'first_name',
@@ -49,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'last_login_at' => 'datetime',
+            'phone_verified_at' => 'datetime',
             'password' => 'hashed',
             'status' => UserStatus::class
         ];

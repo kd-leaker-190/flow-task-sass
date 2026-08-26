@@ -19,4 +19,5 @@ return [
     'register' => 'You have been registered successfully.',
     'login' => 'You have been logged in successfully.',
     'logout' => 'You have been logged out successfully.',
+    'email_verification_sent' => 'Email verification sent successfully.',
 ];
