@@ -5,7 +5,7 @@ namespace App\OpenApi\Endpoints\Api\V1\User;
 use OpenApi\Attributes as OA;
 
 #[OA\Get(
-    path: "/api/v1/user/show",
+    path: "/api/v1/user",
     description: "Returns authenticated user data",
     summary: "Get authenticated user data",
     tags: ["User"],

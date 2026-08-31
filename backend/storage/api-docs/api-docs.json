@@ -21,19 +21,23 @@
             "description": "Local development server"
         },
         {
+            "url": "http://127.0.0.1:8000",
+            "description": "Local development server"
+        },
+        {
             "url": "https://api.example.com",
             "description": "Production server"
         }
     ],
     "paths": {
-        "/api/v1/user/show": {
+        "/api/v1/user": {
             "get": {
                 "tags": [
                     "User"
                 ],
                 "summary": "Get authenticated user data",
                 "description": "Returns authenticated user data",
-                "operationId": "64509df577a371905e5e7e67355ce10f",
+                "operationId": "7e88bda2553637b99bb3dd98960b0b46",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
